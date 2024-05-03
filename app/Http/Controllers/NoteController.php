@@ -71,9 +71,12 @@ class NoteController extends Controller
         }
 
         $data = $request->validate(['note' =>  ['required', 'string']]);
+        $data['user_id'] = $request->user()->id;
+
         $note = $note->update($data);
 
-        return to_route('note.show', $note)->with('message', 'Note updated successfully!');
+        return to_route('note.index')->with('message', 'Note deleted!');
+        // return to_route('note.show', $note)->with('message', 'Note updated successfully!');
     }
 
     /**
